@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGC Marketplace - Get Paid $50/video or Buy Authentic UGC Content</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a202c;
+            background: #0a0a0f;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(45deg, #0f0f23, #1a1a3e, #2d1b69, #8b5cf6);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(139, 92, 246, 0.3);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Header */
+        .header {
+            position: relative;
+            padding: 100px 0 120px;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #ffffff, #8b5cf6, #06b6d4);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
+            line-height: 1.1;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            margin-bottom: 48px;
+            opacity: 0.9;
+            font-weight: 400;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 24px 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-links a.active {
+            color: #8b5cf6;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        /* Sections */
+        .section {
+            position: relative;
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            margin: 40px 0;
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 64px;
+            background: linear-gradient(135deg, #1a202c, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glass morphism cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 48px rgba(139, 92, 246, 0.2);
+        }
+
+        /* Form Styling */
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #1a202c;
+        }
+
+        .form-group {
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #374151;
+            font-size: 1rem;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 20px 24px;
+            border: 2px solid rgba(139, 92, 246, 0.2);
+            border-radius: 16px;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 16px 32px rgba(139, 92, 246, 0.2);
+        }
+
+        textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        /* Checkbox Styling */
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 8px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .checkbox-item input {
+            width: auto;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 20px 40px;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            color: white;
+            text-decoration: none;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 24px 48px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-large {
+            padding: 24px 48px;
+            font-size: 1.2rem;
+            margin: 32px auto;
+            display: block;
+            max-width: 400px;
+        }
+        
+        .btn-creator {
+            background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+        }
+        
+        .btn-brand {
+            background: linear-gradient(135deg, #8b5cf6, #d946ef);
+        }
+
+        .payment-description {
+            text-align: center;
+            color: #6b7280;
+            font-size: 1rem;
+            margin-top: 16px;
+            font-weight: 500;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .feature-card {
+            text-align: center;
+            position: relative;
+        }
+
+        .feature-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 32px;
+            font-size: 3rem;
+            color: white;
+            box-shadow: 0 16px 32px rgba(139, 92, 246, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1a202c;
+        }
+
+        .feature-card p {
+            color: #4b5563;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Video Gallery */
+        .video-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-top: 80px;
+        }
+
+        .video-card {
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            background: white;
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(139, 92, 246, 0.15);
+        }
+
+        /* Photo Container */
+        .photo-container {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            border-radius: 16px 16px 0 0;
+            overflow: hidden;
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .beauty-photo {
+            background-image: url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&h=600&fit=crop&crop=face&auto=format&q=80');
+        }
+
+        .skincare-photo {
+            background-image: url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&h=600&fit=crop&auto=format&q=80');
+        }
+
+        .fitness-photo {
+            background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop&auto=format&q=80');
+        }
+
+        .lifestyle-photo {
+            background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop&auto=format&q=80');
+        }
+
+        .unboxing-photo {
+            background-image: url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop&auto=format&q=80');
+        }
+
+        .testimonial-photo {
+            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&crop=face&auto=format&q=80');
+        }
+
+        .photo-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(139, 92, 246, 0.3), rgba(6, 182, 212, 0.3));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .photo-container:hover .photo-overlay {
+            opacity: 1;
+        }
+
+        .photo-container:hover {
+            transform: scale(1.02);
+        }
+
+        .photo-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            animation: iconFloat 2s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .photo-container:hover .photo-icon {
+            transform: scale(1.2) translateY(-10px);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .video-info {
+            padding: 32px;
+        }
+
+        .video-category {
+            font-weight: 700;
+            color: #8b5cf6;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .video-description {
+            color: #6b7280;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 80px 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1a202c, #2d3748, #4a5568);
+            color: white;
+            padding: 60px 0 40px;
+            margin-top: 100px;
+            border-radius: 0;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 24px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #8b5cf6, #06b6d4);
+            border-radius: 3px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: #8b5cf6;
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .section {
+                margin: 20px 0;
+                padding: 60px 0;
+                border-radius: 24px;
+            }
+            
+            .glass-card {
+                padding: 24px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            
+            .video-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .stats-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Success animation */
+        .success-animation {
+            background: linear-gradient(135deg, #10b981, #059669) !important;
+            color: white !important;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            gap: 20px;
+        }
+        
+        .tab-btn {
+            padding: 16px 32px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 16px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            color: white;
+            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Creator Benefits Section */
+        .benefits-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 80px 0;
+        }
+        
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #8b5cf6;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(139, 92, 246, 0.1);
+        }
+        
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #1a202c;
+        }
+        
+        .benefit-card p {
+            color: #4b5563;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .benefit-description {
+            color: #6b7280;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">UGC-<span>HUB</span></a>
+            <div class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#for-creators">For Creators</a>
+                <a href="#for-brands">For Brands</a>
+                <a href="#gallery">Gallery</a>
+            </div>
+            <div class="nav-buttons">
+                <a href="#for-creators" class="btn btn-creator">Become Creator</a>
+                <a href="#for-brands" class="btn btn-brand">Brand Request</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="header">
+        <div class="container">
+            <h1 class="hero-title loading">Get Paid $50/video or Buy Authentic UGC Content</h1>
+            <p class="hero-subtitle loading">For Creators: Earn cash for 30-sec videos. For Brands: Order high-converting UGC.</p>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="creator-tab">I'm a Creator</button>
+                <button class="tab-btn" data-tab="brand-tab">I'm a Brand</button>
+            </div>
+            
+            <div class="tab-content active" id="creator-tab">
+                <a href="#for-creators" class="btn btn-large btn-creator">Join as Creator & Get Paid $50/video</a>
+                <p class="payment-description">We'll review your application within 24 hours. Once approved, you can start receiving video requests.</p>
+            </div>
+            
+            <div class="tab-content" id="brand-tab">
+                <a href="#for-brands" class="btn btn-large btn-brand">Request UGC Content & Pay $50/video</a>
+                <p class="payment-description">Payment is securely processed via Stripe. You'll receive your video within 7 days.</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number">1,250+</div>
+                <div class="stat-label">Active Creators</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">8,900+</div>
+                <div class="stat-label">Videos Created</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">$445K+</div>
+                <div class="stat-label">Paid to Creators</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Brand Satisfaction</div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <section class="section loading" id="how-it-works">
+            <h2 class="section-title">How It Works</h2>
+            <div class="features-grid">
+                <div class="feature-card glass-card">
+                    <div class="feature-icon"><i class="fas fa-video"></i></div>
+                    <h3>Create Videos</h3>
+                    <p>Creators make authentic 30-second UGC videos showcasing products they genuinely love and use</p>
+                </div>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon"><i class="fas fa-money-bill-wave"></i></div>
+                    <h3>Get Paid</h3>
+                    <p>Earn $50 per approved video through our secure escrow payment system with instant payouts</p>
+                </div>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Boost Sales</h3>
+                    <p>Brands receive high-converting authentic content that drives real engagement and sales results</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Enhanced Creator Benefits Section -->
+        <section class="section loading" id="creator-benefits">
+            <h2 class="section-title">Benefits for Creators</h2>
+            <div class="benefits-section">
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-dollar-sign"></i></div>
+                    <h3>Earn $50 Per Video</h3>
+                    <p>Competitive payment for each approved video</p>
+                    <div class="benefit-description">
+                        <p>Get paid $50 for every video that meets our quality standards. Payments are processed weekly via PayPal, Stripe, or direct bank transfer.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-gift"></i></div>
+                    <h3>Free Products</h3>
+                    <p>Receive products to review and keep</p>
+                    <div class="benefit-description">
+                        <p>Brands will send you free products to feature in your videos. Keep all products you receive as part of your compensation package.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h3>Flexible Schedule</h3>
+                    <p>Work at your own pace</p>
+                    <div class="benefit-description">
+                        <p>Choose which projects to accept and work on your own schedule. No minimum commitment required - create as much or as little as you want.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-users"></i></div>
+                    <h3>Build Portfolio</h3>
+                    <p>Grow your professional presence</p>
+                    <div class="benefit-description">
+                        <p>Create content that showcases your skills to potential clients. Our platform helps you build a professional portfolio that can open doors to new opportunities.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Growth Opportunities</h3>
+                    <p>Advance your creator career</p>
+                    <div class="benefit-description">
+                        <p>Top creators get access to premium projects with higher pay rates. We also offer educational resources to help you improve your content creation skills.</p>
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-globe"></i></div>
+                    <h3>Global Reach</h3>
+                    <p>Work with international brands</p>
+                    <div class="benefit-description">
+                        <p>Access projects from brands worldwide without leaving your home. Our platform connects you with companies from over 30 countries.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Creator Signup Form -->
+        <section class="section loading" id="for-creators">
+            <h2 class="section-title">Become a Creator</h2>
+            <div class="form-container glass-card">
+                <h3 class="form-title">Join our creator community & start earning</h3>
+                <form id="creator-form" action="#" method="post">
+                    <div class="form-group">
+                        <label for="creator-name">Full Name</label>
+                        <input type="text" id="creator-name" name="name" required placeholder="Your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="creator-email">Email</label>
+                        <input type="email" id="creator-email" name="email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="creator-phone">Phone</label>
+                        <input type="tel" id="creator-phone" name="phone" placeholder="(123) 456-7890">
+                    </div>
+                    <div class="form-group">
+                        <label for="social-links">Social Media Links</label>
+                        <input type="text" id="social-links" name="social-links" placeholder="Instagram, TikTok, YouTube, etc." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sample-video">Sample Video Link (if available)</label>
+                        <input type="url" id="sample-video" name="sample-video" placeholder="https://youtube.com/your-video">
+                    </div>
+                    <div class="form-group">
+                        <label>Content Categories</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="beauty" name="categories" value="beauty">
+                                <label for="beauty">Beauty</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fitness" name="categories" value="fitness">
+                                <label for="fitness">Fitness</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fashion" name="categories" value="fashion">
+                                <label for="fashion">Fashion</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="lifestyle" name="categories" value="lifestyle">
+                                <label for="lifestyle">Lifestyle</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="tech" name="categories" value="tech">
+                                <label for="tech">Tech</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="food" name="categories" value="food">
+                                <label for="food">Food</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-large btn-creator">Apply as Creator</button>
+                </form>
+                <p class="payment-description">We'll review your application within 24 hours. Once approved, you can start receiving video requests.</p>
+            </div>
+        </section>
+
+        <!-- Brand Request Form -->
+        <section class="section loading" id="for-brands">
+            <h2 class="section-title">Brand Request</h2>
+            <div class="form-container glass-card">
+                <h3 class="form-title">Describe your product + video needs</h3>
+                <form id="brand-form" action="#" method="post">
+                    <div class="form-group">
+                        <label for="brand-name">Name</label>
+                        <input type="text" id="brand-name" name="name" required placeholder="Your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="brand-email">Email</label>
+                        <input type="email" id="brand-email" name="email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="brand-name">Company Name</label>
+                        <input type="text" id="company-name" name="company" placeholder="Your company name">
+                    </div>
+                    <div class="form-group">
+                        <label for="product">Product</label>
+                        <input type="text" id="product" name="product" placeholder="e.g. Organic skincare serum, fitness tracking app, etc." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="video-request">Video Request</label>
+                        <textarea id="video-request" name="video-request" placeholder="Describe your ideal UGC video - style, messaging, target audience, specific requirements, and any key talking points..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Number of Videos</label>
+                        <select id="quantity" name="quantity" required>
+                            <option value="1">1 Video ($50)</option>
+                            <option value="3">3 Videos ($135)</option>
+                            <option value="5">5 Videos ($200)</option>
+                            <option value="10">10 Videos ($375)</option>
+                            <option value="20">20 Videos ($700)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-large btn-brand">Submit Request & Pay</button>
+                </form>
+                <p class="payment-description">Payment is securely processed via Stripe. You'll receive your video within 7 days.</p>
+            </div>
+        </section>
+
+        <!-- Video Gallery -->
+        <section class="section loading" id="gallery">
+            <h2 class="section-title">Featured UGC Videos</h2>
+            <p style="text-align: center; margin-bottom: 40px; color: #4b5563; font-size: 1.2rem;">Real examples created by our talented creators</p>
+            
+            <div class="video-gallery">
+                <div class="video-card">
+                    <div class="photo-container beauty-photo">
+                        <div class="photo-overlay">
+                            <div class="photo-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-category">Beauty</div>
+                        <p class="video-description">Authentic review of a new skincare serum with before/after results</p>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="photo-container fitness-photo">
+                        <div class="photo-overlay">
+                            <div class="photo-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-category">Fitness</div>
+                        <p class="video-description">Home workout equipment demonstration showing real usage</p>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="photo-container unboxing-photo">
+                        <div class="photo-overlay">
+                            <div class="photo-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-category">Unboxing</div>
+                        <p class="video-description">Genuine reaction to opening a new tech gadget package</p>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="photo-container skincare-photo">
+                        <div class="photo-overlay">
+                            <div class="photo-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-category">Skincare</div>
+                        <p class="video-description">Morning routine featuring organic skincare products</p>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="photo-container lifestyle-photo">
+                        <div class="photo-overlay">
+                            <div class="photo-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-category">Lifestyle</div>
+                        <p class="video-description">Daily use of a productivity app in real-life scenarios</p>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="photo-container testimonial-photo">
+                        <div class="photo-overlay">
+                            <div class="photo-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-category">Testimonial</div>
+                        <p class="video-description">Customer sharing their positive experience with a service</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>UGC-HUB</h3>
+                <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 20px;">Connecting authentic creators with brands looking for genuine user-generated content.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>For Creators</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> How It Works</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> Creator Guidelines</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> Payment Information</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> Apply as Creator</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>For Brands</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> UGC Benefits</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> Pricing Plans</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> Brand Guidelines</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> Success Stories</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> Request Content</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><a href="mailto:nithin123tml@gmail.com"><i class="fas fa-envelope"></i> nithin123tml@gmail.com</a></li>
+                    <li><a href="tel:8919138182"><i class="fas fa-phone"></i> +91 89191 38182</a></li>
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> Tirupati, Andhra Pradesh</a></li>
+                    <li><a href="#"><i class="fas fa-question-circle"></i> Help Center</a></li>
+                    <li><a href="#"><i class="fas fa-file-alt"></i> Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 UGC-HUB. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Create particles for background
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random size
+                const size = Math.random() * 20 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                
+                // Random animation delay
+                particle.style.animationDelay = `${Math.random() * 20}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Form submission handling
+        document.getElementById('creator-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.classList.add('success-animation');
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> Application Submitted!';
+            
+            // Reset after 3 seconds
+            setTimeout(() => {
+                submitBtn.classList.remove('success-animation');
+                submitBtn.innerHTML = 'Apply as Creator';
+                this.reset();
+            }, 3000);
+        });
+        
+        document.getElementById('brand-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.classList.add('success-animation');
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> Request Submitted!';
+            
+            // Reset after 3 seconds
+            setTimeout(() => {
+                submitBtn.classList.remove('success-animation');
+                submitBtn.innerHTML = 'Submit Request & Pay';
+                this.reset();
+            }, 3000);
+        });
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            // Add loading animations
+            const loadingElements = document.querySelectorAll('.loading');
+            loadingElements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.2}s`;
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
